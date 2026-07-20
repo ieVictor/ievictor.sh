@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Marked in the browser</title>
+
+  <!-- STYLES -->
+  <link rel="stylesheet" href="./styles/index.css">
+  <link rel="stylesheet" href="./styles/text.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.0/dist/katex.css" integrity="sha384-2+h6oUUIw7vugilf5a3uXmtpsWkg6Ckb6raUIjbpBQovzVBIE0abAlyMDdzTTQ6D" crossorigin="anonymous">
+
+  <!-- MAIN SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.18.0/dist/katex.min.js" integrity="sha384-OE4SMRr5gMJQzKSD08J46vKsKgY8NxVtO1LW+/q3NJ0WHsGsdN4oebgEjwwWuyvG" crossorigin="anonymous"></script>
+
+  <!-- MARKED EXTENSIONS -->
+  <script src="https://cdn.jsdelivr.net/npm/marked-custom-heading-id/lib/index.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked-katex-extension/lib/index.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked-sequential-hooks/dist/index.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moo/moo.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked-hook-frontmatter/dist/index.umd.min.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1 id="title"></h1>
+      <p id="subtitle"></p>
+      <div id="information">
+      </div>
+    </header>
+    <div id="content"></div>
+    <div id="links"></div>
+  </main>
+  <script>
+    const content = "template"
+
+    marked.use(markedCustomHeadingId());
+    marked.use(markedKatex({
+      throwOnError: false,
+      nonStandard: false
+    }));
+    marked.use(markedSequentialHooks({
+      markdownHooks: [markedHookFrontmatter()],
+      htmlHooks: [(html, data) => {
+        informationElement = document.getElementById("information");
+
+        if (data.title) {
+          document.title = data.title;
+          document.getElementById("title").textContent = data.title;
+        }
+        if (data.subtitle) {
+          document.getElementById("subtitle").textContent = data.subtitle;
+        }
+
+        if (data.author) {
+          if (document.getElementById("author")) return;
+
+          const information = document.createElement('p');
+          information.innerHTML = `<b>by:</b> ${data.author.name}`
+          information.id = 'author';
+
+          informationElement.append(information);
+        }
+
+        if (data.metadata) {
+          for (const [key, value] of Object.entries(data.metadata)) {
+            if (document.getElementById(key)) return;
+
+            const information = document.createElement('p');
+            information.innerHTML = `<b>${key}:</b> ${value}`
+            information.id = `${key}`;
+
+            informationElement.append(information);
+          }
+        }
+
+        return html;
+      }]
+    }));
+
+    fetch(`./posts/${content}/index.md`)
+      .then(response => {
+        if (!response.ok) throw new Error('File was not ok');
+        return response.text();
+      })
+      .then(markdownString => {
+        document.getElementById('content').innerHTML = marked.parse(markdownString)
+      })
+  </script>
+</body>
+</html>
