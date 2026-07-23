@@ -149,6 +149,10 @@ main#hero {
     flex-direction: row;
     gap: var(--space-sm);
 
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
+
     ul {
       width: 100%;
       display: flex;
@@ -216,9 +220,10 @@ header {
 
   #information {
     display: flex;
-    flex-flow: row;
+    flex-flow: row wrap;
     justify-content: center;
     gap: var(--space-sm);
+    row-gap: var(--space-xs);
     color: var(--title-color)
   }
 }
@@ -269,4 +274,10 @@ table {
 
 .katex {
   font-size: var(--text-font-size) !important;
+}
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: var(--space-xs);
 }
