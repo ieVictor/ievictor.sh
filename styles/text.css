@@ -52,6 +52,13 @@ h3 {
   color: var(--title-color);
 }
 
+h4 {
+  margin: var(--space-sm) auto;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  color: var(--title-color);
+}
+
 #subtitle {
   margin: 0;
   text-align: center;
