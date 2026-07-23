@@ -23,3 +23,54 @@ In the early 1980s, Leslie Lamport was working at SRI, where he needed to write 
 ### Typesetting system
 LaTeX attempts to follow the design philosophy of separating presentation from content, so that authors can focus on the content of what they are writing without attending simultaneously to its visual appearance. In preparing a LaTeX document, the author specifies the logical structure using commands such as chapter, section, table, figure, etc., and lets the LaTeX system handle the formatting and layout of these structures. As a result, it encourages the separation of the layout from the content – while still allowing manual typesetting adjustments whenever needed. This concept is similar to the mechanism by which many word processors allow styles to be defined globally for an entire document, or the use of Cascading Style Sheets in styling HyperText Markup Language (HTML) documents.
 
+The LaTeX system is a markup language that handles typesetting and rendering,[11] and can be arbitrarily extended by using the underlying macro language to develop custom macros such as new environments and commands. Such macros are often collected into packages, which could then be made available to address some specific typesetting needs such as the formatting of complex mathematical expressions or graphics (e.g., the use of the align environment provided by the amsmath package to produce aligned equations).
+
+### Pronunciation and typography
+The characters 'T', 'E', and 'X' in the name come from the Greek capital letters tau, epsilon, and chi, as the name of TeX derives from the Ancient Greek: τέχνη ('skill', 'art', 'technique'); for this reason, TeX's creator Donald Knuth promotes its pronunciation as /tɛx/ (tekh)[20] (that is, with a voiceless velar fricative as in Modern Greek, or the 'ch' in 'loch'). Lamport remarks that "TeX is usually pronounced tech, making lah-tech, lah-tech, and lay-tech the logical choices; but language is not always logical, so lay-tecks is also possible."[21]
+
+The name is printed in running text with a typographical logo: LaTeX. In media where the logo cannot be precisely reproduced in running text, the word is typically given the unique capitalization LaTeX. Alternatively, the TeX, LaTeX,[22] and XeTeX[23] logos can also be rendered via pure CSS and XHTML for use in graphical web browsers – by following the specifications of the internal \LaTeX macro.[24]
+
+| Something | Anotherthing |
+| -------------- | --------------- |
+| Data 1 | Response 1 |
+| Data 2 | Response 2 |
+| Data 2 | Response 2 |
+| Data 2 | Response 2 |
+| Data 2 | Response 2 |
+
+
+## Versions
+LaTeX2e is the current version of LaTeX, since it replaced LaTeX 2.09 in 1994.[40] As of 2020, LaTeX3, which started in the early 1990s, is under a long-term development project.[5] Planned features include improved syntax (separation of content from styling), hyperlink support, a new user interface, access to arbitrary fonts and a new documentation.[41] Some LaTeX3 features are available in LaTeX2e using packages,[42] and by 2020 many features have been enabled in LaTeX2e by default for a gradual transition.[5]
+
+```python
+A = tf.Variable([[1, 2, 3], [4, 5, 6]], dtype=tf.dtypes.float32)
+Q = tf.Variable([[0, 1], [-1, 0]], dtype=tf.dtypes.float32) # Orthogonal
+
+Af = tf.norm(
+    A,
+    ord="fro",
+    axis=[-2, -1],
+)
+
+QAf = tf.norm(
+    Q @ A,
+    ord="fro",
+    axis=[-2, -1],
+)
+
+Ata = tf.transpose(A) @ A
+trace = tf.linalg.trace(Ata)
+
+print(f"{Af=}")
+print(f"{Af**2=}")
+print(f"{QAf=}")
+print(f"{trace=}")
+```
+
+**Result:**
+```text
+Af=<tf.Tensor: shape=(), dtype=float32, numpy=9.539392471313477>
+Af**2=<tf.Tensor: shape=(), dtype=float32, numpy=91.00000762939453>
+QAf=<tf.Tensor: shape=(), dtype=float32, numpy=9.539392471313477>
+trace=<tf.Tensor: shape=(), dtype=float32, numpy=91.0>
+```

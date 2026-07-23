@@ -7,7 +7,9 @@
   <!-- STYLES -->
   <link rel="stylesheet" href="./styles/index.css">
   <link rel="stylesheet" href="./styles/text.css">
+  <link rel="stylesheet" href="./styles/toc.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.0/dist/katex.css" integrity="sha384-2+h6oUUIw7vugilf5a3uXmtpsWkg6Ckb6raUIjbpBQovzVBIE0abAlyMDdzTTQ6D" crossorigin="anonymous">
+  <link rel="stylesheet" href="./styles/dracula-theme.css">
 
   <!-- MAIN SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
@@ -20,6 +22,13 @@
   <script src="https://cdn.jsdelivr.net/npm/moo/moo.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked-hook-frontmatter/dist/index.umd.min.js"></script>
+
+  <!-- HIGHLIGHT JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+
+  <!-- SITE SCRIPTS -->
+  <script src="./scripts/frontmatter.js"></script>
+  <script src="./scripts/toc.js"></script>
 </head>
 <body>
   <main>
@@ -43,38 +52,7 @@
     marked.use(markedSequentialHooks({
       markdownHooks: [markedHookFrontmatter()],
       htmlHooks: [(html, data) => {
-        informationElement = document.getElementById("information");
-
-        if (data.title) {
-          document.title = data.title;
-          document.getElementById("title").textContent = data.title;
-        }
-        if (data.subtitle) {
-          document.getElementById("subtitle").textContent = data.subtitle;
-        }
-
-        if (data.author) {
-          if (document.getElementById("author")) return;
-
-          const information = document.createElement('p');
-          information.innerHTML = `<b>by:</b> ${data.author.name}`
-          information.id = 'author';
-
-          informationElement.append(information);
-        }
-
-        if (data.metadata) {
-          for (const [key, value] of Object.entries(data.metadata)) {
-            if (document.getElementById(key)) return;
-
-            const information = document.createElement('p');
-            information.innerHTML = `<b>${key}:</b> ${value}`
-            information.id = `${key}`;
-
-            informationElement.append(information);
-          }
-        }
-
+        renderFrontmatter(data);
         return html;
       }]
     }));
@@ -86,6 +64,8 @@
       })
       .then(markdownString => {
         document.getElementById('content').innerHTML = marked.parse(markdownString)
+        buildToc()
+        hljs.highlightAll()
       })
   </script>
 </body>

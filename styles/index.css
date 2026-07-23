@@ -1,22 +1,26 @@
 :root {
   /* Colors */
-  --text-color: #f1f1f1;
+  --text-color: #e8e2d6;
+  --title-color: #f1f1f1;
   --background-color: #161616;
   --surface-color: #212121;
   --border-color: #5c5c5c;
   --accent-color: wheat;
 
   /* Typography */
-  --font-family: "Source Serif 4", serif;
-  --text-font-size: 20px;
+  --font-family: "Noto Sans", sans-serif;
+  --font-family-title: "Source Serif 4", serif;
+  --text-font-size: 1em;
+  --font-size-xsm: 0.5em;
   --font-size-sm: 1.25em;
   --font-size-md: 1.5em;
   --font-size-lg: 1.75em;
-  --font-size-xl: 3em;
-  --font-size-xxl: 4em;
+  --font-size-xl: clamp(2rem, 6vw, 3em);
+  --font-size-xxl: clamp(2.5rem, 9vw, 4em);
   --font-weight-light: 300;
   --font-weight-regular: 400;
-  --font-weight-bold: 800;
+  --font-weight-bold: 700;
+  --font-weight-title: 800;
 
   /* Spacing */
   --space-xs: .5rem;
@@ -49,6 +53,14 @@ main {
   box-sizing: border-box;
 
   flex: 1;
+  /* `margin: 0 auto` below sets auto cross-axis margins, which override
+     flex stretch and would otherwise size main via shrink-to-fit — i.e.
+     an unwrappable child (a long code line) could force this whole column
+     wider than the viewport regardless of its own overflow handling.
+     An explicit width keeps main's box tied to the viewport; margin:auto
+     still centers it once max-width caps it below 100%. */
+  width: 100%;
+  min-width: 0;
   max-width: var(--body-max-width);
 
   margin: 0 auto;
@@ -70,7 +82,7 @@ main#hero {
   span {
     margin: 0;
     text-align: center;
-    font-weight: var(--font-weight-light);
+    font-weight: var(--font-weight-regular);
   }
 
   nav {
@@ -145,7 +157,16 @@ header {
     flex-flow: row;
     justify-content: center;
     gap: var(--space-sm);
+    color: var(--title-color)
   }
+}
+
+#content {
+  /* Cap the reading measure so prose lines stay comfortable even though
+     `main` itself is wider (935px). */
+  max-width: 70ch;
+  width: 100%;
+  align-self: center;
 }
 
 blockquote {
@@ -156,5 +177,29 @@ blockquote {
 
   >p {
     margin: 0;
+  }
+}
+
+pre {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+table {
+  width: 100%;
+  background-color: var(--surface-color);
+  border: var(--border);
+
+  th {
+    border: var(--border);
+  }
+
+  tbody {
+    width: 100%;
+
+    tr:hover {
+      opacity: 0.7;
+      border-bottom: var(--border);
+    }
   }
 }
