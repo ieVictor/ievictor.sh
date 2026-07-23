@@ -6,7 +6,7 @@ html {
 
 #content h2,
 #content h3 {
-  scroll-margin-top: var(--space-lg);
+  scroll-margin-top: calc(var(--nav-height) + var(--space-lg));
 }
 
 #toc {
@@ -70,10 +70,10 @@ html {
 @media (min-width: 1440px) {
   #toc {
     position: fixed;
-    top: var(--space-lg);
+    top: calc(var(--nav-height) + var(--space-lg));
     right: calc(50% + (var(--body-max-width) / 2) + var(--space-md));
     width: 190px;
-    max-height: calc(100dvh - var(--space-lg) * 2);
+    max-height: calc(100dvh - var(--nav-height) - var(--space-lg) * 2);
     overflow-y: auto;
   }
 
@@ -87,10 +87,11 @@ html {
 @media (max-width: 1439.98px) {
   #toc {
     position: fixed;
-    inset-block: 0;
+    top: var(--nav-height);
+    bottom: 0;
     inset-inline-start: 0;
     width: min(280px, 80vw);
-    padding-top: calc(var(--space-lg) + var(--space-sm));
+    padding-top: var(--space-sm);
     background-color: var(--surface-color);
     border-right: var(--border);
     overflow-y: auto;

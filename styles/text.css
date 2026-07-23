@@ -8,7 +8,12 @@ html {
 
 body {
   font-size: var(--text-font-size);
-  line-height: 1.6;
+  line-height: 27px;
+  hyphens: auto;
+}
+
+p {
+  margin-top: var(--space-xs);
 }
 
 h1 {
@@ -20,14 +25,14 @@ h1 {
   font-family: var(--font-family-title);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-title);
-  letter-spacing: -1px;
+  letter-spacing: -.012em;
   text-wrap: balance;
   color: var(--title-color);
 }
 
 h2 {
   position: relative;
-  margin: var(--space-sm) auto;
+  margin: var(--space-lg) auto;
   text-transform: none;
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
@@ -42,18 +47,18 @@ h2::after {
   left: 0;
   width: 100%;
   height: 1px;
-  background-color: var(--border-color);
+  background-color: gray;
 }
 
 h3 {
-  margin: var(--space-sm) auto;
+  margin: var(--space-md) auto;
   font-weight: var(--font-weight-bold);
   line-height: 1.2;
   color: var(--title-color);
 }
 
 h4 {
-  margin: var(--space-sm) auto;
+  margin: var(--space-md) auto;
   font-weight: var(--font-weight-bold);
   line-height: 1.2;
   color: var(--title-color);

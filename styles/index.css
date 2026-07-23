@@ -1,10 +1,10 @@
 :root {
   /* Colors */
-  --text-color: #e8e2d6;
+  --text-color: #fdf7ed;
   --title-color: #f1f1f1;
-  --background-color: #161616;
-  --surface-color: #212121;
-  --border-color: #5c5c5c;
+  --background-color: #141412;
+  --surface-color: color-mix(in srgb, var(--background-color) 98%, white);
+  --border-color: color-mix(in srgb, var(--background-color) 96%, white);
   --accent-color: wheat;
 
   /* Typography */
@@ -18,7 +18,7 @@
   --font-size-xl: clamp(2rem, 6vw, 3em);
   --font-size-xxl: clamp(2.5rem, 9vw, 4em);
   --font-weight-light: 300;
-  --font-weight-regular: 400;
+  --font-weight-regular: 500;
   --font-weight-bold: 700;
   --font-weight-title: 800;
 
@@ -35,6 +35,11 @@
   /* Borders & effects */
   --border: 1px solid var(--border-color);
   --hover-opacity: .5;
+
+  /* Navigation */
+  --nav-height: 60px;
+  --nav-background: rgba(22, 22, 22, 0.8);
+  --nav-blur: 10px;
 }
 
 html {
@@ -68,6 +73,60 @@ main {
 
   display: flex;
   flex-flow: column;
+}
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  background-color: var(--nav-background);
+  backdrop-filter: blur(var(--nav-blur));
+  -webkit-backdrop-filter: blur(var(--nav-blur));
+  border-bottom: var(--border);
+}
+
+.site-nav__inner {
+  box-sizing: border-box;
+  max-width: var(--body-max-width);
+  height: var(--nav-height);
+  margin: 0 auto;
+  padding: 0 var(--body-side-padding);
+
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-nav__brand {
+  font-family: var(--font-family-title);
+  font-variant-caps: small-caps;
+  font-weight: var(--font-weight-title);
+  font-size: var(--font-size-sm);
+  color: var(--title-color);
+  user-select: none;
+}
+
+.site-nav--hero .site-nav__brand {
+  display: none;
+}
+
+.site-nav__links {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  margin-inline-start: auto;
+  gap: var(--space-md);
+
+  svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
 }
 
 main#hero {
@@ -151,6 +210,9 @@ header {
   flex-flow: column;
   gap: var(--space-sm);
   margin: 0 0 var(--space-lg) 0;
+  max-width: 70ch;
+  width: 100%;
+  align-self: center;
 
   #information {
     display: flex;
@@ -170,6 +232,7 @@ header {
 }
 
 blockquote {
+  border-radius: 2px;
   margin: 0;
   padding: var(--space-sm);
   background-color: var(--surface-color);
@@ -202,4 +265,8 @@ table {
       border-bottom: var(--border);
     }
   }
+}
+
+.katex {
+  font-size: var(--text-font-size) !important;
 }

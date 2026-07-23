@@ -17,8 +17,7 @@ $$
 \text{Frobenius norm is the square root of the sum of the absolute squares of each element.}
 $$
 
-## Questions
-
+## Easy questions
 ### E1. Compute $‖A‖_F$ for $A = [[3, 4], [0, 0]]$, then compute the $L_2$ norm of the vector $[3,4]$.
 
 ```python
@@ -116,7 +115,7 @@ Af_5=<tf.Tensor: shape=(), dtype=float32, numpy=14.142135620117188>
 
 The result is **14.1421** in both cases: multiplying without recomputing from scratch and computing directly give the same result.
 
----
+## Medium questions
 ### M1. Given $A = [[1, -2, -3], [4, 0, 1]]$, compute $‖A‖_F$ and $‖Aᵀ‖_F$. Explain from the definition why they must be equal for any matrix.
 
 ```python
@@ -181,7 +180,7 @@ In our test $||A+B||_F$ was equal to **6.480740547180176** and $||A||_F + ||B||_
 
 In this case, neither of the two matrices meets these conditions.
 
----
+## Hard questions
 ### H1. Prove that $‖A‖_F² = tr(AᵀA)$ for any real $m×n$ matrix $A$. Then use this identity to prove that $‖QA‖_F = ‖A‖_F$ when $Q$ is orthogonal.
 
 ```python
@@ -227,7 +226,7 @@ trace=<tf.Tensor: shape=(), dtype=float32, numpy=91.0>
 ```
 
 
-#### The first question: $||A||^2_F = tr(A^t A)$
+#### **The first question: $||A||^2_F = tr(A^t A)$**
 As we said before, the **Frobenius norm** of a matrix is the square root of the sum of the absolute squares of each element. Given by:
 
 $$
@@ -266,7 +265,7 @@ $$
 #### **Before the second question: what actually is an orthogonal matrix?**
 An orthogonal matrix is a square matrix whose columns are **orthonormal**.
 
-##### **What actually is an orthonormal column?**
+#### **What actually is an orthonormal column?**
 These are vectors that are both mutually orthogonal and normalized.
 - Orthogonal: Their dot product (inner products) is equal zero.
 - Normalized: The length (or norm) of each vector is equal one.
@@ -288,7 +287,7 @@ B =
 \text{Matrix B is orthogonal and normalized}
 $$
 
-##### Identity
+#### **Identity**
 A square matrix $Q$ satisfying $Q^T Q = Q Q^T = I$, which is equivalent to $Q^{-1} = Q^T$
 
 ```python
@@ -355,7 +354,7 @@ Q^{-1} =
 = Q^T
 $$
 
-##### Is there any orthogonal matrix where the elements are not zeros and ones?
+#### Is there any orthogonal matrix where the elements are not zeros and ones?
 Yes, the overwhelming majority of them.
 
 **Examples:**
@@ -408,7 +407,7 @@ Q^T Q = Q Q^T: True
 Q^-1 = Q^T: True
 ```
 
-##### **Back to $||QA||_F = ||A||_F$ for orthogonal Q**
+#### **Back to $||QA||_F = ||A||_F$ for orthogonal Q**
 Apply the identity to QA:
 
 $$
