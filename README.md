@@ -46,17 +46,24 @@ full rebuild from source, so a template/CDN change can't leave a stale page behi
 
 Preview locally with any static server pointed at `dist/`, e.g. `npx serve dist`.
 
-## Deploy — Cloudflare Pages
+## Deploy — Cloudflare Workers (Static Assets)
 
-Configured in the Cloudflare Pages dashboard (native build, no GitHub Action):
+Deployed as a Git-connected Cloudflare Workers build. Dashboard settings:
 
 - **Build command:** `npm run build`
-- **Output directory:** `dist`
+- **Deploy command:** `npx wrangler deploy`
 - **Environment variable:** `NODE_VERSION = 20` (or newer)
-- **Custom domain:** `ievictor.sh` attached under the project's *Custom domains* tab.
-  (No `CNAME` file — the domain lives in Cloudflare's config.)
 
-A bad URL is served `dist/404.html` ("Post not found" + back-home) by Cloudflare Pages.
+`wrangler.jsonc` points the deploy at `./dist` (uploading the repo root instead
+would fail with "Asset too large" on `node_modules`). It also sets
+`not_found_handling: "404-page"`, so an unknown URL serves `dist/404.html`
+("Post not found" + back-home).
+
+- **Custom domain:** `ievictor.sh` attached under the Worker's
+  *Settings → Domains & Routes*. (No `CNAME` file — the domain lives in
+  Cloudflare's config.)
+- **Preview deploys:** every branch/PR gets its own URL — the end-to-end way to
+  check a post before promoting it to production.
 
 ## Layout / source map
 
@@ -66,5 +73,4 @@ A bad URL is served `dist/404.html` ("Post not found" + back-home) by Cloudflare
 - `404.html` — not-found page (copied into `dist/`).
 - `scripts/post-toc.js` — the only shipped script: wires the pre-rendered TOC's
   mobile drawer + scroll-spy. No content rendering.
-- `template.html` + `scripts/{toc,frontmatter,nav}.js` — the **old client-side-render
-  sandbox**, kept for ad-hoc rendering tests. Dev-only; never copied into `dist/`.
+- `wrangler.jsonc` — Cloudflare deploy config (serves `./dist`).

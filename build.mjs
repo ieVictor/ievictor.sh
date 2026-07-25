@@ -24,7 +24,7 @@ const POSTS_DIR = path.join(ROOT, 'posts');
 const INCLUDE_DRAFTS = process.argv.includes('--drafts');
 
 // Frontmatter keys that drive the build/homepage rather than the visible info
-// lines (mirrors scripts/frontmatter.js RESERVED_KEYS, plus our own).
+// lines in the post header.
 const RESERVED_KEYS = new Set(['title', 'subtitle', 'matterDataPrefix', 'date', 'category', 'draft']);
 
 // Layout ids we must not let a heading slug collide with.
@@ -53,7 +53,7 @@ function fill(template, values) {
   return out;
 }
 
-// Copied verbatim from scripts/toc.js so slugs match the client sandbox.
+// Slugify heading text into an anchorable id (lowercase, ascii, hyphenated).
 function slugify(text) {
   const slug = text
     .toLowerCase()
@@ -86,8 +86,7 @@ marked.use(
   })
 );
 // Custom heading renderer: assign a stable id to every h2/h3 (so anchors and the
-// pre-rendered TOC line up) and collect the tree. Replaces the client-side
-// ensureIds/buildTree in scripts/toc.js.
+// pre-rendered TOC line up) and collect the tree for renderTocMarkup().
 marked.use({
   renderer: {
     heading(token) {
@@ -115,8 +114,8 @@ function renderPost(md) {
   return { html, toc };
 }
 
-// h2 -> topic; h3 -> subtopic nested under the closest preceding topic. Mirrors
-// buildTree() in scripts/toc.js, emitted as a string instead of DOM nodes.
+// h2 -> topic; h3 -> subtopic nested under the closest preceding topic.
+// Emits the TOC markup that scripts/post-toc.js later wires up.
 function renderTocMarkup(entries) {
   if (entries.length === 0) return '';
 
@@ -150,7 +149,7 @@ function renderTocMarkup(entries) {
 }
 
 // ---------------------------------------------------------------------------
-// frontmatter -> header (mirrors renderFrontmatter in scripts/frontmatter.js)
+// frontmatter -> post header (title, subtitle, info lines)
 // ---------------------------------------------------------------------------
 
 function authorName(author) {
