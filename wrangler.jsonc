@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ievictor-sh",
+  "compatibility_date": "2026-07-25",
+  // Static-assets-only Worker: no server code, just serve the built site.
+  // `directory` MUST be the build output (dist/), not the repo root — otherwise
+  // wrangler tries to upload node_modules and fails with "Asset too large".
+  "assets": {
+    "directory": "./dist",
+    // Serve dist/404.html for unknown paths (our "Post not found" page).
+    "not_found_handling": "404-page"
+  }
+}
