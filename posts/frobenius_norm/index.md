@@ -20,7 +20,7 @@ $$
 $$
 
 ## Easy questions
-### E1. Compute $‖A‖_F$ for $A = [[3, 4], [0, 0]]$, then compute the $L_2$ norm of the vector $[3,4]$.
+### E1. Compute $\|A\|_F$ for $A = [[3, 4], [0, 0]]$, then compute the $L_2$ norm of the vector $[3,4]$.
 
 ```python
 A = tf.Variable([[3, 4], [0, 0]], dtype=tf.dtypes.float32)
@@ -63,7 +63,7 @@ ltwo=<tf.Tensor: shape=(), dtype=float32, numpy=5.0>
 
 **Relation between $L_2$ and $||A||_f$:** The Frobenius norm of a matrix is equivalent to the L2 norm (Euclidean norm) of the matrix treated as a flattened vector.
 
-### E2. Compute $‖A‖_F$ for $A = [[1, 2], [3, 4]]$. Leave the answer in exact radical form.
+### E2. Compute $\|A\|_F$ for $A = [[1, 2], [3, 4]]$. Leave the answer in exact radical form.
 
 ```python
 A = tf.Variable([[1, 2], [3, 4]], dtype=tf.dtypes.float32)
@@ -77,7 +77,7 @@ Af = tf.norm(
 # Radical form = sqrt(Af^2)
 ```
 
-### E3. For $A = [[2, 0], [0, 2]]$, compute $‖A‖_F$. Then compute $‖5A‖_F$ without recomputing from scratch — use the scaling property and verify by direct computation.
+### E3. For $A = [[2, 0], [0, 2]]$, compute $\|A\|_F$. Then compute $\|5A\|_F$ without recomputing from scratch — use the scaling property and verify by direct computation.
 
 ```python
 A = tf.Variable([[2, 0], [0, 2]], dtype=tf.dtypes.float32)
@@ -118,7 +118,7 @@ Af_5=<tf.Tensor: shape=(), dtype=float32, numpy=14.142135620117188>
 The result is **14.1421** in both cases: multiplying without recomputing from scratch and computing directly give the same result.
 
 ## Medium questions
-### M1. Given $A = [[1, -2, -3], [4, 0, 1]]$, compute $‖A‖_F$ and $‖Aᵀ‖_F$. Explain from the definition why they must be equal for any matrix.
+### M1. Given $A = [[1, -2, -3], [4, 0, 1]]$, compute $\|A\|_F$ and $\|A^T\|_F$. Explain from the definition why they must be equal for any matrix.
 
 ```python
 A = tf.Variable([[1, -2, -3], [4, 0, 1]], dtype=tf.dtypes.float32)
@@ -137,7 +137,7 @@ Af_t=<tf.Tensor: shape=(), dtype=float32, numpy=5.5677642822265625>
 
 Frobenius norm is the square root of the sum of the absolute squares of each element. Changing the elements' position (transpose) will not change the result.
 
-### M2. Let $A = [[1, 2], [3, 4]]$ and $B = [[0, 1], [1, 0]]$. Compute $‖A‖_F$, $‖B‖_F$ and $‖A + B‖_F$. Verify that the triangle inequality holds and state whether the equality case $‖A + B‖_F = ‖A‖_F + ‖B‖_F$ is possible, and under what condition.
+### M2. Let $A = [[1, 2], [3, 4]]$ and $B = [[0, 1], [1, 0]]$. Compute $\|A\|_F$, $\|B\|_F$ and $\|A + B\|_F$. Verify that the triangle inequality holds and state whether the equality case $\|A + B\|_F = \|A\|_F + \|B\|_F$ is possible, and under what condition.
 
 ```python
 A, B = tf.Variable([[1, 2], [3, 4]], dtype=tf.dtypes.float32), tf.Variable([[0, 1], [1, 0]], dtype=tf.dtypes.float32)
@@ -183,7 +183,7 @@ In our test $||A+B||_F$ was equal to **6.480740547180176** and $||A||_F + ||B||_
 In this case, neither of the two matrices meets these conditions.
 
 ## Hard questions
-### H1. Prove that $‖A‖_F² = tr(AᵀA)$ for any real $m×n$ matrix $A$. Then use this identity to prove that $‖QA‖_F = ‖A‖_F$ when $Q$ is orthogonal.
+### H1. Prove that $\|A\|_F^2 = tr(A^T A)$ for any real $m \times n$ matrix $A$. Then use this identity to prove that $\|QA\|_F = \|A\|_F$ when $Q$ is orthogonal.
 
 ```python
 A = tf.Variable([[1, 2, 3], [4, 5, 6]], dtype=tf.dtypes.float32)
