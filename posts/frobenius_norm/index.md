@@ -1,5 +1,7 @@
 ---
 title: Frobenius Norm and some Linear Algebra Exercises
+date: '2026-07-23'
+category: post
 subtitle: >-
   An introduction to the Frobenius norm through 6 Linear Algebra exercises (3 easy, 2 medium, 1 hard) covering scaling, transpose invariance, the triangle inequality, and the trace identity for orthogonal matrices — solved with NumPy and TensorFlow.
 author:

@@ -1,5 +1,7 @@
 ---
 title: This should be a post
+draft: true
+category: study
 subtitle: >-
   Proposal to use neural net face-recognition embeddings to power a human
   face-recognition training app by matching and generating or selecting faces
